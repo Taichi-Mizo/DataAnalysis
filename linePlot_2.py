@@ -81,7 +81,7 @@ def extractCol(df):
         df = df.replace(y, y[0:4])
     
     #年期カラムの値が2001~2020年の行のインデックス(list)を取得
-    f_num = df.index[df['年  期'] == '2001'].tolist()
+    f_num = [(df.index[df['年  期'] == '2001'].tolist()[0] - 1)]
     l_num = df.index[df['年  期'] == '2020'].tolist()
     
     #グラフ化するレコードを取得
@@ -99,7 +99,7 @@ def translateJP2EN(JPtext):
     
     translator = Translator()
     
-    ENtext = translator.translate(JPtext, src='ja', dest='ja').text
+    ENtext = translator.translate(JPtext, src='ja', dest='en').text
     
     #print(ENtext)
     
