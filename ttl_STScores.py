@@ -46,19 +46,20 @@ def controller():
     wbpath = r"C:\Users\mttest1\Documents\PyScripts\20220328_STスコア.xlsx"
     wb = openpyxl.load_workbook(wbpath, data_only=True)
     #第0シートは、親シートのため第1シートからデータ取得
-    wsObj = wb.worksheets[1:]
+    sheetNames = wb.sheetnames[1:]
 
-    for ws in wsObj:
+    for sname in sheetNames:
+        ws = wb[sname]
         #シートごとの各チームの最大値を含むレコードを取得
         maxDF = createMaxDF(ws)
+        print(maxDF)
+        
         #抽出したデータを既存のExcelに出力
-        sheetNames = wb.sheetnames[1:]
-        for sname in sheetNames:
-            with pd.ExcelWriter(wbpath, mode='a', engine='openpyxl') as file:
-                maxDF.to_excel(file, sheet_name=(f'max_{sname}'))
-    wb.save(wbpath)
+        with pd.ExcelWriter(wbpath, mode='a', engine='openpyxl') as file:
+            maxDF.to_excel(file, sheet_name=(f'max_{sname}'))
+        
+    #wb.save(wbpath)
     print('処理が完了しました。')
-    exit()
     
 #実行
 controller()
