@@ -4,7 +4,6 @@
 ・取得したチーム名をもとに、「チーム名」カラムが同じ値の行を取得。
 ・取得したDataFrameにおいて、「スコア」カラムの値が最大であるレコードを取得。
 '''
-from email import header
 import openpyxl
 import numpy as np
 import pandas as pd
